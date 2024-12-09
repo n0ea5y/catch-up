@@ -23,7 +23,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('login'), {
+    form.post(route('enduser.login'), {
         onFinish: () => form.reset('password'),
     });
 };
@@ -32,18 +32,16 @@ const submit = () => {
 <template>
     <GuestLayout>
         <Head title="Log in" />
+
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="name" value="名前" />
 
                 <TextInput
                     id="name"
-                    type="text"
                     class="mt-1 block w-full"
                     v-model="form.name"
                     required
-                    autofocus
-                    autocomplete="username"
                 />
 
                 <InputError class="mt-2" :message="form.errors.name" />
@@ -58,7 +56,6 @@ const submit = () => {
                     class="mt-1 block w-full"
                     v-model="form.password"
                     required
-                    autocomplete="current-password"
                 />
 
                 <InputError class="mt-2" :message="form.errors.password" />
@@ -74,20 +71,12 @@ const submit = () => {
             </div>
 
             <div class="mt-4 flex items-center justify-end">
-                <Link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                    Forgot your password?
-                </Link>
-
                 <PrimaryButton
                     class="ms-4"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Log in
+                ログイン
                 </PrimaryButton>
             </div>
         </form>
